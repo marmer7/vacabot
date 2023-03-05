@@ -1,7 +1,7 @@
 ###### Requirements without Version Specifiers ######
-Flask
-openai
-markdown
-python-dotenv
 
 ###### Requirements with Version Specifiers ######
+Flask==2.2.3
+openai==0.27.0
+Markdown==3.4.1
+python-dotenv==1.0.0
