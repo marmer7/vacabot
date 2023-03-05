@@ -1,4 +1,5 @@
 ###### Requirements without Version Specifiers ######
+gunicorn
 
 ###### Requirements with Version Specifiers ######
 Flask==2.2.3
