@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    <h1 class="text-3xl font-bold mb-4">{{ title }}</h1>
+    <h1 class="text-3xl font-bold mb-4 text-gray-600">{{ title }}</h1>
     <form method="post" action="{{ url_for('create_itinerary') }}">
         <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="destination">

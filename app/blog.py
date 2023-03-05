@@ -7,7 +7,7 @@ import markdown
 def extract_blog_dict(filename: str):
     blog_metadata = {"id": filename[:-3]}
 
-    with open(os.path.join("../blog", filename), "r") as f:
+    with open(os.path.join("./blog_posts", filename), "r") as f:
         content = f.read()
         keys = ["title", "date"]
         # extract title from first line of markdown file
@@ -34,7 +34,7 @@ def extract_blog_dict(filename: str):
 
 def get_blog_posts():
     blog_posts = []
-    for filename in os.listdir("../blog"):
+    for filename in os.listdir("./blog_posts"):
         if filename.endswith(".md"):
             blog_post = extract_blog_dict(filename=filename)
             blog_posts.append(blog_post)

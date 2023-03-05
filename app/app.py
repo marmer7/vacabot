@@ -5,7 +5,7 @@ import openai
 from dotenv import load_dotenv
 from flask import Flask, render_template, request
 
-from .blog import extract_blog_dict, get_blog_posts
+from app.blog import extract_blog_dict, get_blog_posts
 
 load_dotenv()  # take environment variables from .env.
 
@@ -22,13 +22,13 @@ def home():
     return render_template("home.html", blog_posts=blog_posts)
 
 
-@app.route("/blog")
+@app.route("/blog_posts")
 def blog():
     blog_posts = get_blog_posts()
-    return render_template("blog.html", blog_posts=blog_posts)
+    return render_template("blog_posts.html", blog_posts=blog_posts)
 
 
-@app.route("/blog/<blog_id>")
+@app.route("/blog_posts/<blog_id>")
 def get_blog_post(blog_id: str):
     blog_post = extract_blog_dict(filename=f"{blog_id}.md")
     return render_template("blog_post.html", blog_post=blog_post)
