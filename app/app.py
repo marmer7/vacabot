@@ -3,7 +3,7 @@ import os
 import markdown
 import openai
 from dotenv import load_dotenv
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request
 
 from app.blog import extract_blog_dict, get_blog_posts
 
@@ -11,6 +11,13 @@ load_dotenv()  # take environment variables from .env.
 
 app = Flask(__name__)
 openai.api_key = os.environ.get("OPENAI_API_KEY")
+
+
+@app.before_request
+def redirect_to_https():
+    if request.headers.get('X-Forwarded-Proto') == 'http':
+        url = request.url.replace('http://', 'https://', 1)
+        return redirect(url, code=301)
 
 
 @app.route("/")
