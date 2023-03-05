@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Load Tailwind CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='build/style.css') }}">
+</head>
+<body>
+    <header class="bg-green-500">
+        <nav class="container mx-auto flex items-center justify-between px-4 py-4">
+            <a href="{{ url_for('home') }}" class="text-white font-bold text-xl">VacaBot</a>
+            <ul class="flex">
+                <!-- <li class="mr-6">
+                    <a href="{{ url_for('home') }}" class="text-white hover:text-gray-400">Home</a>
+                </li> -->
+                <li class="mr-6">
+                    <a href="{{ url_for('blog') }}" class="text-white hover:text-gray-400">Blog</a>
+                </li>
+                <li class="mr-6">
+                    <a href="{{ url_for('create_itinerary') }}" class="text-white hover:text-gray-400">Create Itinerary</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container mx-auto py-8">
+        {% block content %}{% endblock %}
+    </main>
+    <footer py-4>
+        <a href="https://tp.media/click?shmarker=411674&promo_id=7788&source_type=banner&type=click&campaign_id=200&trs=210863" target="_blank"> <img src="https://c200.travelpayouts.com/content?promo_id=7788&shmarker=411674&type=init&trs=210863" alt="Cheap flights with cashback"> </a> 
+    </footer>
+</body>
+</html>

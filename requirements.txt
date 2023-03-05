@@ -1,0 +1,7 @@
+###### Requirements without Version Specifiers ######
+Flask
+openai
+markdown
+python-dotenv
+
+###### Requirements with Version Specifiers ######

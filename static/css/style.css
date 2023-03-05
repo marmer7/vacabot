@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.markdown {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background-color: #fafafa;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.markdown h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  color: #2d3748;
+}
+
+.markdown h3 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+  color: #4a5568;
+}
+
+.markdown p {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  color: #718096;
+}
+
+.markdown ul {
+  list-style: disc;
+  margin-left: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.markdown ol {
+  list-style: decimal;
+  margin-left: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.markdown li {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: #718096;
+}
+
+.markdown a {
+  color: #3182ce;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.25s ease-in;
+}
+
+.markdown a:hover {
+  color: #2d3748;
+  text-decoration: underline;
+}
+
+h2 {
+  color: #3182ce; /* Very Peri */
+}
