@@ -25,13 +25,16 @@ def home():
     blog_posts = get_blog_posts()
     blog_posts = sorted(
         blog_posts, key=lambda blog_post: blog_post["date"], reverse=True
-    )
+    )[:6]
     return render_template("home.html", blog_posts=blog_posts)
 
 
 @app.route("/blog_posts")
 def blog():
     blog_posts = get_blog_posts()
+    blog_posts = sorted(
+        blog_posts, key=lambda blog_post: blog_post["date"], reverse=True
+    )
     return render_template("blog_posts.html", blog_posts=blog_posts)
 
 
