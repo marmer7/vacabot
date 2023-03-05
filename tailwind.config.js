@@ -1,9 +1,9 @@
 module.exports = {
   mode: 'jit',
   purge: [
-    './templates/**/*.html',
-    './static/**/*.js',
-    './static/**/*.css',
+    './app/templates/**/*.html',
+    './app/static/**/*.js',
+    './app/static/**/*.css',
   ],
   darkMode: true, // or 'media' or 'class'
   theme: {
