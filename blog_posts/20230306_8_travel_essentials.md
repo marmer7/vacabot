@@ -1,4 +1,4 @@
-Title=5 Travel Essentials That Every Traveler Needs
+Title=8 Travel Essentials That Every Traveler Needs
 Date=2023-03-06
 
 Whether you're a seasoned traveler or a newbie, there are some items that you simply can't travel without. Here are our top 5 travel essentials that we recommend for every traveler.
