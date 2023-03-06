@@ -30,3 +30,4 @@ Buy it on Amazon: https://amzn.to/3JiH0tu
 
 In summary, these 5 travel essentials will make your travels easier, more organized, and more enjoyable. Don't forget to pack them on your next trip!
 
+Disclosure: Please note that some of the links in this post may be affiliate links. This means that if you click on a link and make a purchase, we may earn a commission at no additional cost to you. We only recommend products and services that we use and trust, and your support helps keep our content free. Thank you for your support!

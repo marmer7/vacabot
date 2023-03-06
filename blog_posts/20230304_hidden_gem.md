@@ -20,5 +20,4 @@ Montreal is a vibrant and multicultural city that is perfect for budget-consciou
 
 In conclusion, traveling doesn't have to be expensive, and there are plenty of budget-friendly travel destinations that offer amazing experiences. By choosing one of these affordable destinations and finding the right deals on accommodation through [WayAway](https://tp.media/click?shmarker=411674&promo_id=5761&source_type=link&type=click&campaign_id=200&trs=210863), you can save money and still have a great trip. So, start planning your next budget-friendly adventure today! Remember, for great deals on accommodations, you can check out WayAway.
 
-
-
+Disclosure: Please note that some of the links in this post may be affiliate links. This means that if you click on a link and make a purchase, we may earn a commission at no additional cost to you. We only recommend products and services that we use and trust, and your support helps keep our content free. Thank you for your support!
