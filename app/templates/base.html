@@ -12,6 +12,11 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vacabot is a travel blog that provides tips and inspiration for travelers. Explore new destinations and plan your next adventure with us.">
+    <meta name="keywords" content="travel, blog, tips, inspiration, destinations, adventure, technology">
+    <!-- Other meta tags -->
+    {% block extra_head %}
+    {% endblock %}
     <title>{% block title %}{% endblock %}</title>
     <!-- Load Tailwind CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='vbuild/style.css') }}">
