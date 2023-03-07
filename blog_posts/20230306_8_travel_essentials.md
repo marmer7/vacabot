@@ -3,7 +3,7 @@ Date=2023-03-06
 Description=From a water bottle to noise-canceling headphones, there are some travel essentials that you simply can't travel without. This article lists the top 8 items that every traveler should pack for a stress-free and comfortable journey.
 Keywords=travel essentials, water bottle, money belt, laundry bags, tote bag, noise-canceling headphones, travel pillow, packing cubes, portable charger
 
-Whether you're a seasoned traveler or a newbie, there are some items that you simply can't travel without. Here are our top 5 travel essentials that we recommend for every traveler.
+Whether you're a seasoned traveler or a newbie, there are some items that you simply can't travel without. Here are our top 8 travel essentials that we recommend for every traveler.
 
 ### 1. Water Bottle
 A water bottle is an absolute must-have for any traveler. Not only does it help you stay hydrated on long flights or road trips, but it also saves you money by allowing you to refill at water fountains instead of constantly buying bottled water. We recommend the [Hydro Flask Standard Mouth Water Bottle](https://amzn.to/3Yp4m4P), which is made from durable stainless steel and keeps drinks cold for up to 24 hours or hot for up to 12 hours.
