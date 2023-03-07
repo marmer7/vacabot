@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %}Blog{% endblock %}
+{% block title %}{{ blog_post.title }}{% endblock %}
+{% block description %}{{ blog_post.description }}{% endblock %}
 
 {% block extra_head %}
     <!-- Additional meta tags or other content -->
     <meta property="og:title" content="{{ blog_post.title }}">
+    <meta property="og:description" content="{{ blog_post.description }}">
     <meta property="og:url" content="{{ url_for('get_blog_post', blog_id=blog_post.id) }}">
     <meta name="twitter:title" content="{{ blog_post.title }}">
+    <meta property="twitter:description" content="{{ blog_post.description }}">
 {% endblock %}
 
 {% block content %}

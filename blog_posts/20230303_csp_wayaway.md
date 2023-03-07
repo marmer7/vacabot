@@ -1,6 +1,7 @@
 Title=How to Save Money on Travel with Chase Sapphire Preferred and WayAway
 Date=2023-03-03
-
+Description=In this comprehensive guide, learn how to save money on travel with Chase Sapphire Preferred and WayAway. Get the best deals on flights, hotels, and more. Plus, additional travel tips to maximize your savings.
+Keywords=travel, money-saving, Chase Sapphire Preferred, WayAway, flight aggregator, hotel aggregator, credit card, rewards, travel tips, public transportation, off-season, reusable water bottle, snacks, interest charges, commission
 
 Traveling is one of life’s greatest pleasures, but it can also be expensive. However, with the right tools and strategies, you can save money and still have a fantastic trip. In this comprehensive guide, we’ll show you how to use the Chase Sapphire Preferred® card and WayAway to get the best deals on flights, hotels, and more. We’ll also provide additional travel tips to help you maximize your savings.
 

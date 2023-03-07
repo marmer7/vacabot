@@ -9,7 +9,7 @@ def extract_blog_dict(filename: str):
 
     with open(os.path.join("./blog_posts", filename), "r") as f:
         content = f.read()
-        keys = ["title", "date"]
+        keys = ["title", "date", "description", "keywords"]
         # extract title from first line of markdown file
 
         for key in keys:

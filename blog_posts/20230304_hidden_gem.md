@@ -1,5 +1,7 @@
 Title=Top 5 Budget-Friendly Travel Destinations in the US and Abroad
 Date=2023-03-04
+Description=Discover the top 5 budget-friendly travel destinations in the US and abroad and learn how to save money on accommodation with WayAway. From exploring the French Quarter in New Orleans to experiencing the vibrant culture in Mexico City, there are plenty of affordable destinations that offer amazing experiences.
+Keywords=budget-friendly travel, travel destinations, US, abroad, WayAway, New Orleans, Louisiana, Mexico City, Portland, Oregon, Charleston, South Carolina, Montreal, Canada, affordable accommodations, free activities, cultural experiences, saving money on travel, travel deals
 
 Traveling can be expensive, but it doesn't have to be. With the right planning and research, you can find budget-friendly travel destinations that won't break the bank. Whether you're looking to explore new cultures abroad or stay closer to home, there are plenty of affordable travel destinations that offer amazing experiences. In this article, we'll share the top 5 budget-friendly travel destinations in the US and abroad, and how you can save money on accommodation with the help of WayAway.
 
