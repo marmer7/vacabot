@@ -2,8 +2,15 @@
 
 {% block title %}Blog{% endblock %}
 
+{% block extra_head %}
+    <!-- Additional meta tags or other content -->
+    <meta property="og:title" content="VacaBlog Posts">
+    <meta property="og:url" content="{{ url_for('blog') }}">
+    <meta name="twitter:title" content="{{ VacaBlog Posts }}">
+{% endblock %}
+
 {% block content %}
-    <!-- <h1 class="text-3xl font-bold mb-4">Blog Posts</h1> -->
+     <h1 class="text-3xl font-bold mb-4">VacaBlog</h1>
     {% if blog_posts %}
     <ul class="space-y-4">
         {% for blog_post in blog_posts %}
