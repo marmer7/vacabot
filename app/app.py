@@ -62,13 +62,13 @@ def create_itinerary():
 
         user_input = "\n".join(
             [
-                "Input:",
-                "CurrentDate=2023-03-01",
-                f"Destination={destination}",
-                f"StartDate={start_date}",
-                f"EndDate={end_date}",
-                f"Interests={str(interests)}",
-                "Output:",
+                "UserInput",
+                "CurrentDate:2023-03-01",
+                f"Destination:{destination}",
+                f"StartDate:{start_date}",
+                f"EndDate:{end_date}",
+                f"Interests:{str(interests)}",
+                "VacaBot",
             ]
         )
 
@@ -84,7 +84,7 @@ def create_itinerary():
         )
         itinerary = response.choices[0].text.strip()
         return render_template(
-            "itinerary.html", title="Your Itinerary", itinerary=itinerary
+            "itinerary.html", title=f"{destination.title()} Itinerary", itinerary=markdown.markdown(itinerary)
         )
     else:
         return render_template("create_itinerary.html", title="Create Itinerary")
