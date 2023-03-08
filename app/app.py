@@ -3,7 +3,7 @@ import os
 import markdown
 import openai
 from dotenv import load_dotenv
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, send_from_directory
 
 from app.blog import extract_blog_dict, get_blog_posts
 
@@ -88,6 +88,11 @@ def create_itinerary():
         )
     else:
         return render_template("create_itinerary.html", title="Create Itinerary")
+
+
+@app.route("/robots.txt")
+def serve_robots():
+    return send_from_directory(app.static_folder, 'robots.txt')
 
 
 @app.template_filter("markdown")
