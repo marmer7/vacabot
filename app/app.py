@@ -84,7 +84,7 @@ def create_itinerary():
         )
         itinerary = response.choices[0].text.strip()
         return render_template(
-            "itinerary.html", title=f"{destination.title()} Itinerary", itinerary=markdown.markdown(itinerary)
+            "itinerary.html", title="Your Itinerary", itinerary=markdown.markdown(itinerary)
         )
     else:
         return render_template("create_itinerary.html", title="Create Itinerary")
