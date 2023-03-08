@@ -45,7 +45,7 @@ def get_blog_post(blog_id: str):
 
 
 @app.route("/search_flights")
-def flights():
+def search_flights():
     return render_template("find_flight.html")
 
 

@@ -3,6 +3,18 @@
 {% block title %}{{ title }}{% endblock %}
 {% block description %}Create dynamically generated itineraries using AI.{% endblock %}
 
+{% block extra_head %}
+    <!-- Additional meta tags or other content -->
+    <meta name="keywords" content="itinerary, AI, travel, vacation, trip, planning, personalized">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="Create a dynamically generated itinerary using AI.">
+    <meta property="og:url" content="{{ url_for('create_itinerary') }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta property="twitter:description" content="Create a dynamically generated itinerary using AI.">
+    <meta name="twitter:image:alt" content="{{ title }}">
+{% endblock %}
+
 {% block content %}
     <h1 class="text-3xl font-bold mb-4 text-gray-600">{{ title }}</h1>
     <form method="post" action="{{ url_for('create_itinerary') }}">
