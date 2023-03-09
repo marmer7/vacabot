@@ -4,12 +4,22 @@
 
 {% block content %}
 <div class="container mx-auto py-8">
-    <div class="markdown">
-        <h2>{{ title }}</h2>
-        {{ itinerary | safe }}
-    </div>
+  <div class="markdown">
+    <h2>{{ title }}</h2>
+    {{ itinerary | safe }}
+  </div>
+
+  <div class="flex justify-start my-8">
+    <a href="{{ url_for('create_itinerary') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-none focus:outline-none focus:shadow-outline">
+      Generate Another Itinerary
+    </a>
+
+    {% if destination is not none %}
+      &nbsp;
+      <a href="{{ url_for('search_flights') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-l-none focus:outline-none focus:shadow-outline">
+        Book Flight to {{ destination }}
+      </a>
+    {% endif %}
+  </div>
 </div>
-<a href="{{ url_for('create_itinerary') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-    Generate Another Itinerary
-</a>
 {% endblock %}

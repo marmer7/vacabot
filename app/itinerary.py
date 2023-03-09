@@ -6,6 +6,30 @@ import openai
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 
+def validate_destination(destination):
+    with open("app/prompts/validate_destination.txt", "r", encoding="utf-8") as f:
+        prompt = f.read()
+
+    prompt = f"{prompt}{destination}\noutput:"
+
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=prompt,
+        max_tokens=300,
+        n=1,
+        stop=None,
+        temperature=0.4,
+    )
+
+    response_text = response.choices[0].text.strip()
+    print(response_text)
+
+    if response_text == "None":
+        return None
+    else:
+        return response_text
+
+
 def generate_itinerary(destination, start_date, end_date, interests):
     end_date = min(end_date, start_date + timedelta(days=9))
     number_of_days = (end_date - start_date).days + 1

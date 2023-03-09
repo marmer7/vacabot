@@ -8,7 +8,7 @@ from flask import (Flask, redirect, render_template, request,
                    send_from_directory)
 
 from app.blog import extract_blog_dict, get_blog_posts
-from app.itinerary import generate_itinerary
+from app.itinerary import generate_itinerary, validate_destination
 
 load_dotenv()  # take environment variables from .env.
 
@@ -62,11 +62,21 @@ def create_itinerary():
             interest.strip() for interest in request.form["interests"].split(",")
         ]
 
-        itinerary = generate_itinerary(destination, start_date, end_date, interests)
+        cleaned_destination = validate_destination(destination)
+
+        if cleaned_destination is None:
+            itinerary = (
+                f"{destination} is not a valid input. Please add a valid destination."
+            )
+        else:
+            itinerary = generate_itinerary(
+                cleaned_destination, start_date, end_date, interests
+            )
 
         return render_template(
             "itinerary.html",
             title="Your Itinerary",
+            destination=cleaned_destination,
             itinerary=markdown.markdown(itinerary),
         )
     else:
