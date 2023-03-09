@@ -1,11 +1,14 @@
 import os
+from datetime import datetime
 
 import markdown
 import openai
 from dotenv import load_dotenv
-from flask import Flask, redirect, render_template, request, send_from_directory
+from flask import (Flask, redirect, render_template, request,
+                   send_from_directory)
 
 from app.blog import extract_blog_dict, get_blog_posts
+from app.itinerary import generate_itinerary
 
 load_dotenv()  # take environment variables from .env.
 
@@ -53,38 +56,18 @@ def search_flights():
 def create_itinerary():
     if request.method == "POST":
         destination = request.form["destination"]
-        start_date = request.form["start_date"]
-        end_date = request.form["end_date"]
-        interests = request.form["interests"].split(",")
+        start_date = datetime.strptime(request.form["start_date"], "%Y-%m-%d").date()
+        end_date = datetime.strptime(request.form["end_date"], "%Y-%m-%d").date()
+        interests = [
+            interest.strip() for interest in request.form["interests"].split(",")
+        ]
 
-        with open("app/prompts/itinerary.txt", "r", encoding="utf-8") as f:
-            prompt = f.read()
+        itinerary = generate_itinerary(destination, start_date, end_date, interests)
 
-        user_input = "\n".join(
-            [
-                "UserInput",
-                "CurrentDate:2023-03-01",
-                f"Destination:{destination}",
-                f"StartDate:{start_date}",
-                f"EndDate:{end_date}",
-                f"Interests:{str(interests)}",
-                "VacaBot",
-            ]
-        )
-
-        prompt = f"{prompt}\n{user_input}"
-        print(prompt)
-        response = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=prompt,
-            max_tokens=2400,
-            n=1,
-            stop=None,
-            temperature=0.7,
-        )
-        itinerary = response.choices[0].text.strip()
         return render_template(
-            "itinerary.html", title="Your Itinerary", itinerary=markdown.markdown(itinerary)
+            "itinerary.html",
+            title="Your Itinerary",
+            itinerary=markdown.markdown(itinerary),
         )
     else:
         return render_template("create_itinerary.html", title="Create Itinerary")
@@ -92,7 +75,7 @@ def create_itinerary():
 
 @app.route("/robots.txt")
 def serve_robots():
-    return send_from_directory(app.static_folder, 'robots.txt')
+    return send_from_directory(app.static_folder, "robots.txt")
 
 
 @app.template_filter("markdown")
