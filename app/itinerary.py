@@ -55,10 +55,6 @@ def generate_itinerary(destination, start_date, end_date, interests):
         with open("app/prompts/itinerary2.txt", "r", encoding="utf-8") as f:
             prompt = f.read()
         prompt = f"{prompt}\n{user_input}"
-
-        print("2------------")
-        print(prompt)
-
         response = openai.Completion.create(
             engine="text-davinci-003",
             prompt=prompt,
@@ -67,8 +63,6 @@ def generate_itinerary(destination, start_date, end_date, interests):
             stop=None,
             temperature=0.7,
         )
-        print("2------------")
-        print(response)
         itinerary2 = response.choices[0].text.strip()
         itinerary = "\n".join([itinerary, itinerary2])
     return itinerary
