@@ -3,7 +3,7 @@ name: Deploy to Heroku
 on:
   push:
     branches:
-      - main
+      - main # Replace 'main' with the name of your default branch if different
 
 jobs:
   deploy:
@@ -31,3 +31,10 @@ jobs:
       run: |
         heroku container:release web --app $HEROKU_APP_NAME
         heroku container:release worker --app $HEROKU_APP_NAME
+
+    - name: Run database migrations
+      env:
+        HEROKU_APP_NAME: vacabot # Replace with your Heroku app's name
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: |
+        heroku run flask db upgrade --app $HEROKU_APP_NAME
