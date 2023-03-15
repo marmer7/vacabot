@@ -13,3 +13,4 @@ COPY app app
 
 # Set the command to start the RQ worker
 CMD rq worker --url $REDIS_URL
+

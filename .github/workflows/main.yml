@@ -13,9 +13,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    
+    - name: "Deploy the web dyno"
+      uses: "akhileshns/heroku-deploy@v3.12.12"
+      with:
+        docker_heroku_process_type: web
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: vacabot
+        heroku_email: ${{ secrets.HEROKU_EMAIL }}
+        justlogin: true
+      
     - name: Login to Heroku Container Registry
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku container:login
 
     - name: Build and push Docker images
