@@ -3,11 +3,11 @@ from datetime import date, timedelta
 
 import requests
 from flask_wtf import FlaskForm
+from rq.decorators import job
 from wtforms import DateField, StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError
 
-import app
-from app import openai
+from app import openai, task_queue
 
 
 class MaxDaysValidator(object):
@@ -126,3 +126,9 @@ def generate_itinerary(destination, start_date, end_date, interests):
         itinerary2 = response.choices[0].text.strip()
         itinerary = "\n".join([itinerary, itinerary2])
     return itinerary
+
+
+def enqueue_generate_itinerary(destination, start_date, end_date, interests):
+    return task_queue.enqueue(
+        generate_itinerary, destination, start_date, end_date, interests
+    )

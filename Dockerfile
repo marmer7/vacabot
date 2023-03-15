@@ -1,6 +1,9 @@
 # Use an official Python runtime as a parent image
 FROM python:3.9
 
+# Install Redis
+RUN apt-get update && apt-get install -y redis-server
+
 # Set the working directory to /app
 WORKDIR /app
 

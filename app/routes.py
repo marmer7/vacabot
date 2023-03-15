@@ -4,10 +4,11 @@ import markdown
 import requests
 from flask import (jsonify, redirect, render_template, request,
                    send_from_directory, url_for)
+from rq.job import Job
 
-from app import app, db
+from app import app, db, redis_conn
 from app.blog import extract_blog_dict, get_blog_posts
-from app.itinerary import ItineraryForm, generate_itinerary
+from app.itinerary import ItineraryForm, enqueue_generate_itinerary
 from app.models import Itinerary
 
 
@@ -57,21 +58,47 @@ def create_itinerary():
         end_date = form.end_date.data
         interests = [interest.strip() for interest in form.interests.data.split(",")]
 
-        itinerary_markdown = generate_itinerary(
-            destination, start_date, end_date, interests
-        )
+        # Enqueue the generate_itinerary task
+        job = enqueue_generate_itinerary(destination, start_date, end_date, interests)
+
+        # Save the job ID and other details in the database
         itinerary = Itinerary(
             destination=destination,
             start_date=start_date,
             end_date=end_date,
             interests=interests,
-            markdown=itinerary_markdown,
+            job_id=job.get_id(),
         )
         db.session.add(itinerary)
         db.session.commit()
-        return redirect(url_for("get_itinerary", id=itinerary.id), code=301)
+
+        # Redirect the user to a "task in progress" page or another page where they can check the status of the task
+        return redirect(url_for("task_in_progress", id=itinerary.id), code=301)
 
     return render_template("create_itinerary.html", title="Create Itinerary", form=form)
+
+
+@app.route("/task_in_progress/<int:id>")
+def task_in_progress(id):
+    itinerary = Itinerary.query.get_or_404(id)
+    job = Job.fetch(itinerary.job_id, connection=redis_conn)
+
+    if job.is_finished:
+        # If the task is complete, update the itinerary object with the generated markdown
+        itinerary_markdown = job.result
+        itinerary.markdown = itinerary_markdown
+        db.session.commit()
+
+        # Redirect the user to the final itinerary page
+        return redirect(url_for("get_itinerary", id=itinerary.id), code=301)
+    else:
+        # If the task is still in progress or has failed, show a status message to the user
+        return render_template(
+            "task_in_progress.html",
+            title="Task In Progress",
+            itinerary=itinerary,
+            job_status=job.get_status(),
+        )
 
 
 @app.route("/itinerary/<int:id>")
@@ -118,6 +145,14 @@ def autocomplete():
 @app.errorhandler(404)
 def catch_all(e):
     return render_template("404.html"), 404
+
+
+@app.route("/task_status/<int:id>")
+def task_status(id):
+    itinerary = Itinerary.query.get_or_404(id)
+    job = Job.fetch(itinerary.job_id, connection=redis_conn)
+
+    return jsonify({"status": job.get_status()})
 
 
 @app.template_filter("markdown")
