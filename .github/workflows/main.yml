@@ -22,8 +22,8 @@ jobs:
       env:
         HEROKU_APP_NAME: vacabot # Replace with your Heroku app's name
       run: |
-        heroku container:push web --app $HEROKU_APP_NAME -v
-        heroku container:push worker --app $HEROKU_APP_NAME -v
+        heroku container:push web --app $HEROKU_APP_NAME -v --context-path ./ --dockerfile Dockerfile
+        heroku container:push worker --app $HEROKU_APP_NAME -v --context-path ./ --dockerfile Dockerfile.worker
         heroku container:release web worker --app $HEROKU_APP_NAME
     - name: Run database migrations
       env:
