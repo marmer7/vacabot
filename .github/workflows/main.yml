@@ -22,7 +22,7 @@ jobs:
       env:
         HEROKU_APP_NAME: vacabot # Replace with your Heroku app's name
       run: |
-        heroku container:push web worker --recursive
+        heroku container:push web worker --recursive --app $HEROKU_APP_NAME
         heroku container:release web worker --app $HEROKU_APP_NAME
     - name: Run database migrations
       env:
