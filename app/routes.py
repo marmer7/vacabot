@@ -115,6 +115,11 @@ def autocomplete():
     return jsonify(data)
 
 
+@app.errorhandler(404)
+def catch_all(e):
+    return render_template("404.html"), 404
+
+
 @app.template_filter("markdown")
 def convert_markdown_to_html(text):
     return markdown.markdown(text)
