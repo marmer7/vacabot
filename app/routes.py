@@ -69,7 +69,7 @@ def create_itinerary():
         )
         db.session.add(itinerary)
         db.session.commit()
-        return redirect(url_for("get_itinerary", id=itinerary.id))
+        return redirect(url_for("get_itinerary", id=itinerary.id), code=301)
 
     return render_template("create_itinerary.html", title="Create Itinerary", form=form)
 
@@ -86,7 +86,7 @@ def get_itinerary(id):
             itinerary=markdown.markdown(itinerary.markdown),
         )
     else:
-        return redirect(url_for("create_itinerary"))
+        return redirect(url_for("create_itinerary"), code=301)
 
 
 @app.route("/robots.txt")
