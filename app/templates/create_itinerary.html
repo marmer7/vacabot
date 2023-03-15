@@ -4,6 +4,62 @@
 {% block description %}Create dynamically generated itineraries using AI.{% endblock %}
 
 {% block extra_head %}
+    <!-- Destination Autocomplete -->
+    <script>
+        function initAutocomplete() {
+            const form = document.querySelector('form');
+            const input = document.getElementById('{{ form.destination.id }}');
+            const searchResults = document.getElementById('searchResults');
+            const errorElement = document.createElement('p');
+            errorElement.classList.add('text-red-600', 'text-xs', 'mt-2');
+            input.parentNode.appendChild(errorElement);
+        
+            let predictions = [];
+    
+            form.addEventListener('submit', (event) => {
+                const isPrediction = predictions.some(prediction => prediction.description === input.value);
+                if (!isPrediction) {
+                    event.preventDefault();
+                    errorElement.textContent = 'Please select a valid city from the suggestions.';
+                } else {
+                    errorElement.textContent = '';
+                }
+            });
+    
+            input.addEventListener('input', async () => {
+                const query = input.value;
+                if (!query) {
+                    searchResults.innerHTML = '';
+                    return;
+                }
+    
+                const response = await fetch(`/api/autocomplete?input=${encodeURIComponent(query)}&types=(cities)`);
+                const data = await response.json();
+    
+                searchResults.innerHTML = '';
+    
+                if (data.predictions) {
+                    predictions = data.predictions;
+                    for (const prediction of data.predictions) {
+                        const item = document.createElement('li');
+                        item.textContent = prediction.description;
+                        item.classList.add('search-result-item', 'px-3', 'py-2', 'hover:bg-gray-200', 'cursor-pointer');
+    
+                        item.addEventListener('click', () => {
+                            input.value = prediction.description;
+                            searchResults.innerHTML = '';
+                        });
+    
+                        searchResults.appendChild(item);
+                    }
+                }
+            });
+        }
+    
+        window.addEventListener('load', () => {
+            initAutocomplete();
+        });
+    </script>    
     <!-- Additional meta tags or other content -->
     <meta name="keywords" content="itinerary, AI, travel, vacation, trip, planning, personalized">
     <meta property="og:title" content="{{ title }}">
@@ -17,37 +73,48 @@
 
 {% block content %}
     <h1 class="text-3xl font-bold mb-4 text-gray-600">{{ title }}</h1>
-    <form method="post" action="{{ url_for('create_itinerary') }}">
-        <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2" for="destination">
+    <h2 class="text-xl font-semibold mb-4 text-gray-600">Enter your trip details</h2>
+    <form method="post" action="{{ url_for('create_itinerary') }}" novalidate>
+        {{ form.csrf_token }}
+        <div class="mb-4 relative">
+            <label class="block text-gray-700 font-bold mb-2" for="{{ form.destination.id }}">
                 Destination
             </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="destination" type="text" name="destination" required>
+            {{ form.destination(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" + (" border-red-500" if form.destination.errors else ""), placeholder="Tokyo, Paris, New York...") }}
+            {% if form.destination.errors %}
+                <p id="destinationHelp" class="text-red-600 text-xs mt-2">{{ form.destination.errors[0] }}</p>
+            {% endif %}
+            <ul id="searchResults" class="absolute left-0 mt-1 w-full bg-white text-gray-700 rounded border shadow-md z-10"></ul>
         </div>
         <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2" for="start_date">
+            <label class="block text-gray-700 font-bold mb-2" for="{{ form.start_date.id }}">
                 Start Date
             </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="start_date" type="date" name="start_date" required>
+            {{ form.start_date(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline") }}
+            {% if form.start_date.errors %}
+                <p class="text-red-600 text-xs mt-2">{{ form.start_date.errors[0] }}</p>
+            {% endif %}
         </div>
         <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2" for="end_date">
+            <label class="block text-gray-700 font-bold mb-2" for="{{ form.end_date.id }}">
                 End Date
             </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="end_date" type="date" name="end_date" required>
-        </div>
+            {{ form.end_date(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline") }}
+            <p class="text-gray-500 text-xs mt-2">Limited to 10 days.</p>
+            {% if form.end_date.errors %}
+                <p class="text-red-600 text-xs mt-2">{{ form.end_date.errors[0] }}</p>
+            {% endif %}
+        </div>        
         <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2" for="interests">
+            <label class="block text-gray-700 font-bold mb-2" for="{{ form.interests.id }}">
                 Interests
             </label>
-            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="interests" name="interests" required></textarea>
+            {{ form.interests(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="Beach, Museums, Parks...") }}
             <p class="text-gray-500 text-xs mt-2">Enter a comma-separated list of interests</p>
         </div>
         <div class="flex items-center justify-between">
-            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                Create Itinerary
-            </button>
-            <a href="{{ url_for('home') }}" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue"
+            {{ form.submit(class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline") }}
+            <a href="{{ url_for('home') }}" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue">Go back to Home</a>
         </div>
     </form>
 {% endblock %}
