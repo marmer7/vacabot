@@ -30,7 +30,9 @@ services:
   redis:
     image: redis
   worker:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.worker
     command: rq worker -u redis://redis:6379
     depends_on:
       - redis

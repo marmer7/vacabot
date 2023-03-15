@@ -1,0 +1,15 @@
+# Use the same base image as your main Dockerfile
+FROM python:3.9-slim
+
+# Copy the same necessary files and install the same dependencies as in your main Dockerfile
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Set your working directory
+WORKDIR /app
+
+# Copy your app folder
+COPY app app
+
+# Set the command to start the RQ worker
+CMD rq worker --url $REDIS_URL
