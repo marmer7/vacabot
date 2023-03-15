@@ -18,19 +18,12 @@ jobs:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku container:login
 
-    - name: Build and push Docker images
+    - name: Build and push Docker image
       env:
-        HEROKU_APP_NAME: vacabot
+        HEROKU_APP_NAME: vacabot # Replace with your Heroku app's name
       run: |
         heroku container:push web --app $HEROKU_APP_NAME
-        heroku container:push worker --app $HEROKU_APP_NAME -f Dockerfile.worker
-
-    - name: Release Docker images
-      env:
-        HEROKU_APP_NAME: vacabot
-      run: |
         heroku container:release web --app $HEROKU_APP_NAME
-        heroku container:release worker --app $HEROKU_APP_NAME
 
     - name: Run database migrations
       env:
