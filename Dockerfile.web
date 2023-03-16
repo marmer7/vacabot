@@ -21,5 +21,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE $PORT
 
 # Start the Flask application; Add -- reload to hot reload in development
-CMD gunicorn app:app --bind 0.0.0.0:$PORT --workers 4  --access-logfile - --error-logfile - 
-
+CMD gunicorn app:app --bind 0.0.0.0:$PORT --workers 4  --access-logfile - --error-logfile -

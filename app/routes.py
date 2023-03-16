@@ -23,8 +23,8 @@ def redirect_to_https():
 def home():
     blog_posts = get_blog_posts()
     blog_posts = sorted(
-        blog_posts, key=lambda blog_post: blog_post["date"], reverse=True
-    )[:6]
+        blog_posts, key=lambda blog_post: blog_post["sort_date"], reverse=True
+    )[:5]
     return render_template("home.html", blog_posts=blog_posts)
 
 
@@ -32,7 +32,7 @@ def home():
 def blog():
     blog_posts = get_blog_posts()
     blog_posts = sorted(
-        blog_posts, key=lambda blog_post: blog_post["date"], reverse=True
+        blog_posts, key=lambda blog_post: blog_post["sort_date"], reverse=True
     )
     return render_template("blog_posts.html", blog_posts=blog_posts)
 

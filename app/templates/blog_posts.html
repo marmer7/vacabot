@@ -10,19 +10,5 @@
 {% endblock %}
 
 {% block content %}
-     <h1 class="text-3xl font-bold mb-4 text-gray-600">VacaBlog</h1>
-    {% if blog_posts %}
-    <ul class="space-y-4">
-        {% for blog_post in blog_posts %}
-        <li>
-            <a href="{{ url_for('get_blog_post', blog_id=blog_post.id) }}" class="block p-4 bg-white rounded-lg shadow-lg hover:bg-gray-50 transition-colors">
-                <h2 class="text-xl font-bold mb-2">{{ blog_post.title }}</h2>
-                <p class="text-gray-600 text-sm">{{ blog_post.date }}</p>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-        <p>No posts yet.</p>
-    {% endif %}
+    {% include 'blog_list.html' %}
 {% endblock %}

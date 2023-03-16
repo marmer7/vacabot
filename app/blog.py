@@ -13,18 +13,29 @@ def extract_blog_dict(filename: str):
         # extract title from first line of markdown file
 
         for key in keys:
-            print(key)
             pattern = f"^{key}=(.*)$"
 
             search = re.search(pattern, content, re.MULTILINE | re.IGNORECASE)
             if search is not None:
                 value = search.group(1).strip()
                 pattern = f"^{key}=.*\n"
-                content = re.sub(pattern, "", content, flags=re.MULTILINE | re.IGNORECASE)
+                content = re.sub(
+                    pattern, "", content, flags=re.MULTILINE | re.IGNORECASE
+                )
             else:
                 value = ""
-            
+
             blog_metadata[key] = value
+
+        if blog_metadata.get("date"):
+            sort_date = (
+                blog_metadata["modified"]
+                if blog_metadata.get("modified")
+                else blog_metadata["date"]
+            )
+            blog_metadata["sort_date"] = sort_date
+        else:
+            blog_metadata["sort_date"] = "1999-01-01"
 
         # Convert markdown to HTML
         html = markdown.markdown(content)
