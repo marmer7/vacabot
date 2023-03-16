@@ -79,7 +79,7 @@ def generate_itinerary(destination, start_date, end_date, interests):
             f"EndDate:{min(end_date, start_date + timedelta(days=4))}",
             f"Days:{min(number_of_days, 5)}",
             f"Interests:{str(interests)}",
-            "VacaBot",
+            "VB",
         ]
     )
 

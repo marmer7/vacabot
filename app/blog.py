@@ -9,21 +9,22 @@ def extract_blog_dict(filename: str):
 
     with open(os.path.join("./blog_posts", filename), "r") as f:
         content = f.read()
-        keys = ["title", "date", "description", "keywords"]
+        keys = ["title", "date", "description", "keywords", "modified"]
         # extract title from first line of markdown file
 
         for key in keys:
+            print(key)
             pattern = f"^{key}=(.*)$"
-            value = (
-                re.search(pattern, content, re.MULTILINE | re.IGNORECASE)
-                .group(1)
-                .strip()
-            )
 
+            search = re.search(pattern, content, re.MULTILINE | re.IGNORECASE)
+            if search is not None:
+                value = search.group(1).strip()
+                pattern = f"^{key}=.*\n"
+                content = re.sub(pattern, "", content, flags=re.MULTILINE | re.IGNORECASE)
+            else:
+                value = ""
+            
             blog_metadata[key] = value
-
-            pattern = f"^{key}=.*\n"
-            content = re.sub(pattern, "", content, flags=re.MULTILINE | re.IGNORECASE)
 
         # Convert markdown to HTML
         html = markdown.markdown(content)
