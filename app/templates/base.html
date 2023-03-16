@@ -4,11 +4,11 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-H3ZG42NF20"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-      gtag('config', 'G-H3ZG42NF20');
+        gtag('config', 'G-H3ZG42NF20');
     </script>
     <title>{% block title %}VacaBot{% endblock %}</title>
     <meta name="description" content="{% block description %}Vacabot is a travel blog that provides tips and inspiration for travelers. Explore new destinations and plan your next adventure with us.{% endblock %}">
@@ -27,6 +27,13 @@
     {% endblock %}
     <!-- Load Tailwind CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='vbuild/style.css') }}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='images/android-chrome-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ url_for('static', filename='images/android-chrome-512x512.png') }}">
 </head>
 <body>
     <header class="bg-blue-500">

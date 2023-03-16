@@ -10,35 +10,35 @@
 {% block content %}
 <div class="container mx-auto py-8">
   <div class="markdown">
-    <h2>{{ title }}</h2>
+    <h2 class="text-3xl font-bold mb-4 text-gray-600">{{ title }}</h2>
     {{ itinerary | safe }}
   </div>
 
-  <div class="flex justify-start my-8">
-    <a href="{{ url_for('create_itinerary') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-none focus:outline-none focus:shadow-outline">
-      Generate Another Itinerary
-    </a>
+    <div class="flex flex-col justify-center items-center my-8 space-y-4">
+      <div class="w-full flex flex-col md:flex-row md:justify-center md:items-center space-y-4 md:space-y-0 md:space-x-4 mt-4">
+        <a href="{{ url_for('create_itinerary') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">
+          Generate Another Itinerary
+        </a>
+        {% if destination is not none %}
+        <a href="{{ url_for('search_flights') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">
+          Book Flight to {{ destination }}
+        </a>
 
-    {% if destination is not none %}
-      &nbsp;
-      <a href="{{ url_for('search_flights') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-l-none focus:outline-none focus:shadow-outline">
-        Book Flight to {{ destination }}
-      </a>
-      &nbsp;
-      <a 
-        href="https://tp.media/click?shmarker=411674&promo_id=2073&source_type=link&type=click&campaign_id=89&trs=210863" 
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-l-none focus:outline-none focus:shadow-outline"
-        target="_blank">
-        Book Experiences with Tiqets
-      </a>
-      &nbsp;
-      <a 
-        href="https://twitter.com/intent/tweet?url=https://www.vacabot.io{{ url_for('get_itinerary', id=id) }}&text=Check%20out%20my%20itinerary%20for%20{{ destination }}!" 
-        class="twitter-share-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-l-none focus:outline-none focus:shadow-outline"
-        data-size="large">
-        Tweet Itinerary
-      </a>
-    {% endif %}
+        <a 
+          href="https://tp.media/click?shmarker=411674&promo_id=2073&source_type=link&type=click&campaign_id=89&trs=210863" 
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+          target="_blank">
+          Book Experiences with Tiqets
+        </a>
+
+        <a 
+          href="https://twitter.com/intent/tweet?url=https://www.vacabot.io{{ url_for('get_itinerary', id=id) }}&text=Check%20out%20my%20itinerary%20for%20{{ destination }}!" 
+          class="twitter-share-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+          data-size="large">
+          Tweet Itinerary
+        </a>
+        {% endif %}
+      </div>
   </div>
 </div>
 {% endblock %}
