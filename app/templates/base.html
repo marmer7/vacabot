@@ -39,7 +39,18 @@
 <body>
     <header class="bg-blue-500">
         <nav class="container mx-auto flex items-center justify-between px-4 py-2 sm:py-4">
-            <a href="{{ url_for('home') }}" class="text-white font-bold text-lg sm:text-2xl">VacaBot</a>
+            <div class="flex items-center">
+                <!-- Text for desktop -->
+                <a href="{{ url_for('home') }}" class="hidden sm:inline-block text-white font-bold text-lg sm:text-2xl">VacaBot</a>
+                <!-- Favicon image for mobile -->
+                <a href="{{ url_for('home') }}" class="inline-block sm:hidden">
+                    <img src="{{ url_for('static', filename='images/mj_cow_transparent.png') }}" alt="VacaBot Logo" class="w-6 h-6">
+                </a>
+                <!-- Favicon image for desktop -->
+                <a href="{{ url_for('home') }}" class="hidden sm:inline-block">
+                    <img src="{{ url_for('static', filename='images/mj_cow_transparent.png') }}" alt="VacaBot Logo" class="w-6 h-6 ml-2">
+                </a>
+            </div>
             <ul class="flex flex-wrap sm:flex-no-wrap sm:items-center">
                 <li class="mr-4">
                     <a href="{{ url_for('blog') }}" class="text-white hover:text-gray-400 text-sm sm:text-base">Blog</a>
