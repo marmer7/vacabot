@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 
-{% block title %}VacaBot{% endblock %}
-{% block description %}Vacabot is a travel blog that provides tips and inspiration for travelers. Explore new destinations and plan your next adventure with us.{% endblock %}
+{% block title %}VacaBot: AI-Powered Itinerary Generator & Travel Inspiration{% endblock %}
+{% block description %}Discover VacaBot, an AI-powered itinerary generator and travel blog offering personalized travel plans. Unleash your wanderlust, explore new destinations, and make your next adventure truly unique.{% endblock %}
 
 {% block extra_head %}
     <!-- Additional meta tags or other content -->
     <meta property="og:url" content="https://vacabot.io/">
-    <meta property="og:title" content="VacaBot">
-    <meta property="og:description" content="Vacabot is a travel blog that provides tips and inspiration for travelers. Explore new destinations and plan your next adventure with us.">
-    <meta name="twitter:title" content="VacaBot">
-    <meta name="twitter:description" content="Vacabot is a travel blog that provides tips and inspiration for travelers. Explore new destinations and plan your next adventure with us.">
-    <meta name="twitter:image:alt" content="VacaBot">
+    <meta property="og:title" content="VacaBot: AI-Powered Itinerary Generator & Travel Inspiration">
+    <meta property="og:description" content="Discover VacaBot, an AI-powered itinerary generator and travel blog offering personalized travel plans. Unleash your wanderlust, explore new destinations, and make your next adventure truly unique.">
+    <meta name="twitter:title" content="VacaBot: AI-Powered Itinerary Generator & Travel Inspiration">
+    <meta name="twitter:description" content="Discover VacaBot, an AI-powered itinerary generator and travel blog offering personalized travel plans. Unleash your wanderlust, explore new destinations, and make your next adventure truly unique.">
+    <meta name="twitter:image:alt" content="VacaBot: AI-Powered Itinerary Generator & Travel Inspiration">
 {% endblock %}
 
 {% block content %}
     <div class="text-center mb-8">
         <img src="{{ url_for('static', filename='images/mj_cow_transparent.png') }}" alt="Grotto Image" class="mx-auto h-48">
         <h1 class="text-4xl font-bold mt-4 mb-2 text-gray-800">Welcome to VacaBot</h1>
-        <p class="text-lg text-gray-600 mb-6">Your ultimate travel planning solution</p>
+        <p class="text-lg text-gray-600 mb-6">Your Ultimate Travel Planning Solution</p>
         <a href="{{ url_for('create_itinerary') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">
             Generate Your Itinerary
         </a>
