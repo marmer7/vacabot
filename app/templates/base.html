@@ -28,12 +28,10 @@
     <!-- Load Tailwind CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='vbuild/style.css') }}">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon-16x16.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='images/android-chrome-192x192.png') }}">
-    <link rel="icon" type="image/png" sizes="512x512" href="{{ url_for('static', filename='images/android-chrome-512x512.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{  url_for('static', filename='favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{  url_for('static', filename='favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{  url_for('static', filename='favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{  url_for('static', filename='favicon/site.webmanifest') }}">
 </head>
 <body>
     <header class="bg-blue-500">
