@@ -8,7 +8,7 @@ from rq.job import Job
 
 from app import app, db, redis_conn
 from app.blog import extract_blog_dict, get_blog_posts
-from app.itinerary import ItineraryForm, enqueue_generate_itinerary
+from app.itinerary import ItineraryForm, UserInput, enqueue_generate_itinerary
 from app.models import Itinerary
 
 
@@ -53,20 +53,25 @@ def create_itinerary():
     form = ItineraryForm()
 
     if form.validate_on_submit():
-        destination = form.destination.data
-        start_date = form.start_date.data
-        end_date = form.end_date.data
         interests = [interest.strip() for interest in form.interests.data.split(",")]
 
+        user_input = UserInput(
+            destination=form.destination.data,
+            start_date=form.start_date.data,
+            end_date=form.end_date.data,
+            is_budget_friendly=form.budget_friendly.data,
+            interests=interests,
+        )
         # Enqueue the generate_itinerary task
-        job = enqueue_generate_itinerary(destination, start_date, end_date, interests)
+        job = enqueue_generate_itinerary(user_input)
 
         # Save the job ID and other details in the database
         itinerary = Itinerary(
-            destination=destination,
-            start_date=start_date,
-            end_date=end_date,
-            interests=interests,
+            destination=user_input.destination,
+            start_date=user_input.start_date,
+            end_date=user_input.end_date,
+            is_budget_friendly=user_input.is_budget_friendly,
+            interests=user_input.interests,
             job_id=job.get_id(),
         )
         db.session.add(itinerary)

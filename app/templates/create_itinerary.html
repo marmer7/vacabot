@@ -105,7 +105,18 @@
             {% if form.end_date.errors %}
                 <p class="text-red-600 text-xs mt-2">{{ form.end_date.errors[0] }}</p>
             {% endif %}
-        </div>        
+        </div>
+        <div class="mb-4">
+            <div class="block text-gray-700 font-bold mb-2">
+                Budget
+            </div>
+            <div class="flex items-center">
+                <input type="checkbox" id="{{ form.budget_friendly.id }}" name="{{ form.budget_friendly.name }}" class="form-checkbox h-5 w-5 text-blue-500 mr-2" />
+                <label for="{{ form.budget_friendly.id }}" class="text-gray-700">
+                    Make it a budget-friendly
+                </label>
+            </div>
+        </div>
         <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="{{ form.interests.id }}">
                 Interests

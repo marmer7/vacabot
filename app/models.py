@@ -8,6 +8,7 @@ class Itinerary(db.Model):
     destination = db.Column(db.Text, nullable=False)
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
+    is_budget_friendly = db.Column(db.BOOLEAN, nullable=True)
     interests = db.Column(db.ARRAY(db.Text), nullable=True)
     markdown = db.Column(db.Text, nullable=True)
     created_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=True)

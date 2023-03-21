@@ -1,10 +1,13 @@
+import datetime
 import os
 from datetime import date, timedelta
+from typing import List, Optional
 
 import requests
 from flask_wtf import FlaskForm
-from rq.decorators import job
-from wtforms import DateField, StringField, SubmitField, TextAreaField
+from pydantic import BaseModel
+from wtforms import (BooleanField, DateField, StringField, SubmitField,
+                     TextAreaField)
 from wtforms.validators import DataRequired, ValidationError
 
 from app import openai, task_queue
@@ -62,23 +65,33 @@ class ItineraryForm(FlaskForm):
         format="%Y-%m-%d",
         validators=[DataRequired(), EndDateValidator(), MaxDaysValidator(10)],
     )
+    budget_friendly = BooleanField("Budget Friendly")
     interests = TextAreaField("Interests")  # Removed DataRequired() validator
     submit = SubmitField("Create Itinerary")
 
 
-def generate_itinerary(destination, start_date, end_date, interests):
-    end_date = min(end_date, start_date + timedelta(days=9))
-    number_of_days = (end_date - start_date).days + 1
+class UserInput(BaseModel):
+    destination: str
+    start_date: datetime.date
+    end_date: datetime.date
+    is_budget_friendly: bool
+    interests: List[str]
+
+
+def generate_itinerary(user_input: UserInput):
+    end_date = min(user_input.end_date, user_input.start_date + timedelta(days=9))
+    number_of_days = (end_date - user_input.start_date).days + 1
 
     user_input = "\n".join(
         [
             "UserInput",
             f"CurrentDate:{date.today()}",
-            f"Destination:{destination}",
-            f"StartDate:{start_date}",
-            f"EndDate:{min(end_date, start_date + timedelta(days=4))}",
+            f"Destination:{user_input.destination}",
+            f"StartDate:{user_input.start_date}",
+            f"EndDate:{min(end_date, user_input.start_date + timedelta(days=4))}",
+            f"BudgetFriendly:{user_input.is_budget_friendly}",
             f"Days:{min(number_of_days, 5)}",
-            f"Interests:{str(interests)}",
+            f"Interests:{str(user_input.interests)}",
             "VB",
         ]
     )
@@ -103,11 +116,12 @@ def generate_itinerary(destination, start_date, end_date, interests):
             [
                 "UserInput",
                 f"CurrentDate:{date.today()}",
-                f"Destination:{destination}",
-                f"StartDate:{start_date}",
+                f"Destination:{user_input.destination}",
+                f"StartDate:{user_input.start_date}",
                 f"EndDate:{end_date}",
+                f"BudgetFriendly:{user_input.is_budget_friendly}",
                 f"Days:{number_of_days}",
-                f"Interests:{str(interests)}",
+                f"Interests:{str(user_input.interests)}",
                 "VacaBot",
                 itinerary,
             ]
@@ -128,7 +142,5 @@ def generate_itinerary(destination, start_date, end_date, interests):
     return itinerary
 
 
-def enqueue_generate_itinerary(destination, start_date, end_date, interests):
-    return task_queue.enqueue(
-        generate_itinerary, destination, start_date, end_date, interests
-    )
+def enqueue_generate_itinerary(user_input: UserInput):
+    return task_queue.enqueue(generate_itinerary, user_input)

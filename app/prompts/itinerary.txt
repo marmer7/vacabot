@@ -20,11 +20,12 @@ Repeating neighborhoods is acceptable if options are limited or further explorat
 VB utilizes storytelling techniques to enhance the itinerary experience.
 <--Example-->
 UserInput
-CurrentDate: 2023-01-01
-Destination: Mexico City
-StartDate: 2023-08-01
-EndDate: 2023-08-03
-Interests: [history, art]
+CurrentDate:2023-01-01
+Destination:Mexico City
+StartDate:2023-08-01
+EndDate:2023-08-03
+BudgetFriendly:False
+Interests:[history, art]
 Days:3
 VB
 ### Day 1:
