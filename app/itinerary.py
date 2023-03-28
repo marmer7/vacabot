@@ -82,7 +82,7 @@ def generate_itinerary(user_input: UserInput):
     end_date = min(user_input.end_date, user_input.start_date + timedelta(days=9))
     number_of_days = (end_date - user_input.start_date).days + 1
 
-    user_input = "\n".join(
+    prompt_input = "\n".join(
         [
             "UserInput",
             f"CurrentDate:{date.today()}",
@@ -99,7 +99,7 @@ def generate_itinerary(user_input: UserInput):
     with open("app/prompts/itinerary.txt", "r", encoding="utf-8") as f:
         prompt = f.read()
 
-    prompt = f"{prompt}\n{user_input}"
+    prompt = f"{prompt}\n{prompt_input}"
 
     response = openai.Completion.create(
         engine="text-davinci-003",
@@ -111,8 +111,8 @@ def generate_itinerary(user_input: UserInput):
     )
     itinerary = response.choices[0].text.strip()
     if number_of_days > 5:
-        itinerary = itinerary + "\n### Day 6:"
-        user_input = "\n".join(
+        itinerary += "\n### Day 6:"
+        prompt_input = "\n".join(
             [
                 "UserInput",
                 f"CurrentDate:{date.today()}",
@@ -128,7 +128,7 @@ def generate_itinerary(user_input: UserInput):
         )
         with open("app/prompts/itinerary2.txt", "r", encoding="utf-8") as f:
             prompt = f.read()
-        prompt = f"{prompt}\n{user_input}"
+        prompt = f"{prompt}\n{prompt_input}"
         response = openai.Completion.create(
             engine="text-davinci-003",
             prompt=prompt,
